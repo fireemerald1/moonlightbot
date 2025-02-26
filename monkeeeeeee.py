@@ -1,3 +1,9 @@
+# IMPORT DOTENV
+from dotenv import load_dotenv
+# LOAD DOTENV
+load_dotenv()
+# SET DISCORD TOKEN
+DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 import discord
 from discord.ext import commands
 from random import random, randint, choice
@@ -377,5 +383,4 @@ async def demote_command(ctx, member: discord.Member):
         await ctx.send('You are not choosen to use this command.')
 
 
-# Replace 'YOUR_BOT_TOKEN' with your bot's token
-bot.run("b")
+bot.run(DISCORD_TOKEN)
