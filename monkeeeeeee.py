@@ -7,8 +7,7 @@ load_dotenv()
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 import discord
 from discord.ext import commands
-from random import random, randint, choice
-import random
+from random import *
 # ======= MODIFIER =======
 credit = 0
 sacCreditTaken = False
