@@ -378,4 +378,4 @@ async def demote_command(ctx, member: discord.Member):
 
 
 # Replace 'YOUR_BOT_TOKEN' with your bot's token
-bot.run("MTMzMzQ2NDYwMjg5MzA5MDgzNg.GTFqCD.ZmT4up43vx4imawIhqyROatvbLgcG7ufb9pTBE")
+bot.run("b")
