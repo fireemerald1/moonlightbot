@@ -5,7 +5,7 @@ import supabase
 import asyncio
 
 # Gantilah 'YOUR_BOT_TOKEN' dengan token botmu
-TOKEN = 'MTI2NDQ1NTY0Njk3MjIxOTQyMw.GPpKVq.Tr9q_MQY3WkEttAf--EJ-ILj_ftyWyQpf-odfg'
+TOKEN = DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 SUPABASE_URL = 'https://ydwmwvzetpejltemygpj.supabase.co'
 SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlkd213dnpldHBlamx0ZW15Z3BqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE2ODE0NDYsImV4cCI6MjA1NzI1NzQ0Nn0.XFRV79t6CY1dODHHQt3-zLeIOnI9kNkc5hhKOSX4rsY'
 
