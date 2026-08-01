@@ -222,9 +222,10 @@ async def spin(ctx):
     rarity_emoji = rarityEmojis[rarity]
     ohno = " <:ohno:1532954047357653062>" if creditGain < 0 else ""
     sign = "+" if creditGain > 0 else ""
+    mob_suffix = f" x{multiplier} ({mobType[mobNum]})" if multiplier != 1 else ""
     embed.add_field(
         name=f"{sign}{creditGain:,} SOCIAL CREDIT{ohno}",
-        value=f"{rarityCredits[rarity]:,} {rarity_emoji} x{multiplier} ({mobType[mobNum]})",
+        value=f"{rarityCredits[rarity]:,} {rarity_emoji}{mob_suffix}",
         inline=False
     )
 
