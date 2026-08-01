@@ -1,0 +1,17 @@
+services:
+  moonlightbot:
+    build: .
+    container_name: moonlightbot
+
+    restart: unless-stopped
+
+    env_file:
+      - .env
+
+    volumes:
+      # Mount the entire project directory
+      - ./:/app
+
+    working_dir: /app
+
+    command: python monkeeeeeee.py

@@ -2,9 +2,9 @@ import os
 # IMPORT DOTENV
 from dotenv import load_dotenv
 # LOAD DOTENV
-load_dotenv()
+load_dotenv
 # SET DISCORD TOKEN
-DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+DISCORD_TOKEN = os.getenv"DISCORD_TOKEN"
 import discord
 from discord.ext import commands
 from random import *
@@ -52,29 +52,29 @@ rarityColors = [
 ]
 
 # Bot setup
-intents = discord.Intents.default()
+intents = discord.Intents.default
 intents.messages = True
 intents.guilds = True
 intents.members = True
 intents.message_content = True
-bot = commands.Bot(command_prefix='!', 
+bot = commands.Botcommand_prefix='!',
                    intents=intents,
-                   case_insensitive=True)
+                   case_insensitive=True
 
 
 @bot.event
-async def on_ready():
-    print(f'Logged in as {bot.user}!')
+async def on_ready:
+    printf'Logged in as {bot.user}!'
 
 # Global variable to save the last sacrificer
 lastSacrificer = None
 
-@bot.command(name='sac')
-async def sac(ctx, amount: int):
+@bot.commandname='sac'
+async def sacctx, amount: int:
     global sacAmount, luckMultiplier, cycle, lastSacrificer
-    sacAmount = float(amount)
-    luckMultiplier = max(0.207125*(2.34915*sacAmount+463.458)**0.5-4.48083,1)
-    
+    sacAmount = floatamount
+    luckMultiplier = max0.207125*2.34915*sacAmount+463.458**0.5-4.48083,1
+
     if sacAmount >= 100 and sacAmount < 1000:
         cycle = 3
     elif sacAmount >= 1000 and sacAmount < 10000:
@@ -89,29 +89,29 @@ async def sac(ctx, amount: int):
     # Save the sacrificer's name
     lastSacrificer = ctx.author.mention
 
-    embed = discord.Embed(
+    embed = discord.Embed
         title="The Flowr Gods Heed Your Sacrifice . . .",
-        description=f"A **{round(luckMultiplier, 1)}x Luck Frenzy** has been activated, and will apply to the next {cycle} spins!",
+        description=f"A **{roundluckMultiplier, 1}x Luck Frenzy** has been activated, and will apply to the next {cycle} spins!",
         color=0xFFFF00  # Yellow color for sac embed
-    )
-    embed.add_field(name="Sacrificed Social Credit", value=f"{sacAmount:,}", inline=False)
-    embed.add_field(name="Successful Sacrifice", value=f"{ctx.author.mention} now has **???** credits!", inline=False)
-    await ctx.send(embed=embed)
+
+    embed.add_fieldname="Sacrificed Social Credit", value=f"{sacAmount:,}", inline=False
+    embed.add_fieldname="Successful Sacrifice", value=f"{ctx.author.mention} now has **???** credits!", inline=False
+    await ctx.sendembed=embed
 
 
-@bot.command(name='spin')
-async def spin(ctx):
+@bot.commandname='spin'
+async def spinctx:
     global credit, sacCreditTaken, cycle, luckMultiplier, lastSacrificer
 
     if cycle <= 0:
-        await ctx.send("No active luck frenzy! Use `!sac` first.")
+        await ctx.send"No active luck frenzy! Use `!sac` first."
         return
 
-    
-    randomValue = random()
-    rng = randomValue/(((luckMultiplier-1)*1)+1)
+
+    randomValue = random
+    rng = randomValue/luckMultiplier-1*1+1
     rarity = 0
-	
+
     if rng < 0.55:
     	rarity+=1
     if rng < 0.35:
@@ -155,76 +155,104 @@ async def spin(ctx):
     if rng == 0:
     	rarity+=1
 
-    mobNum = randint(0, len(mobType) - 3)
-    if random() < 0.001:
-        mobNum = len(mobType) - 2
-    if random() < 0.0002 and rarity >= 8:
-        mobNum = len(mobType) - 1
+    mobNum = randint0, lenmobType - 3
+    if random < 0.001:
+        mobNum = lenmobType - 2
+    if random < 0.0002 and rarity >= 8:
+        mobNum = lenmobType - 1
 
     # Calculate the credit gain
     multiplier = mobMulti[mobNum]
-    creditGain = round(rarityCredits[rarity] * multiplier)
-    credit += round(RETURNVALUE * creditGain)
+    creditGain = roundrarityCredits[rarity] * multiplier
+    credit += roundRETURNVALUE * creditGain
 
-    embed = discord.Embed(
+    embed = discord.Embed
         title=f"{rarityNames[rarity]} {mobType[mobNum]}",
         description=f"You got a **{rarityNames[rarity]} {mobType[mobNum]}**!",
         color=rarityColors[rarity]  # Color depends on rarity
-    )
+
 
     # Add FRENZY section
     frenzy_text = f"{luckMultiplier:.1f}x luck from {lastSacrificer}'s sacrifice!" if lastSacrificer else "No active frenzy."
-    embed.add_field(
+    embed.add_field
         name="FRENZY",
         value=frenzy_text,
         inline=False
-    )
+
 
     # Add Evil Mob Multiplier if the multiplier is negative
     if multiplier < 0:
-        embed.add_field(
+        embed.add_field
             name="Evil Mob Multiplier!",
             value=f"x{multiplier}",
             inline=False
-        )
+
+
+    # Rarity emojis (indexed to match rarityNames)
+    rarityEmojis = [
+        "<:rarity00_Common:1532939862544482324>",       # Common
+        "<:rarity01_Unusual:1532939864742297721>",      # Uncommon
+        "<:rarity02_Rare:1532939867032653988>",         # Rare
+        "<:rarity03_Epic:1532939857683550388>",         # Epic
+        "<:rarity04_Legendary:1532939860220969050>",    # Legendary
+        "<:rarity05_Mythic:1532939850481930300>",       # Mythic
+        "<:rarity06_Ultra:1532939852939661504>",        # Ultra
+        "<:rarity07_Super:1532939855288471622>",        # Super
+        "<:rarity08_Omega:1532939843489890366>",        # Omega
+        "<:rarity09_Fabled:1532939846023118848>",       # Fabled
+        "<:rarity10_Divine:1532939848539832380>",       # Divine
+        "<:rarity11_Supreme:1532939838804852806>",      # Supreme
+        "<:rarity12_Omnipotent:1532939841124171847>",   # Omnipotent
+        "<:rarity13_Astral:1532939832580640828>",       # Astral
+        "<:rarity14_Celestial:1532939834409095260>",    # Celestial
+        "<:rarity15_Seraphic:1532939836934066286>",     # Seraphic
+        "<:rarity16_Transcendent:1532939825840128000>", # Transcendent
+        "<:rarity17_Ethereal:1532939828297990195>",     # Quantum
+        "<:rarity18_Galactic:1532939830432891043>",     # Galactic
+        "<:rarity19_Eternal:1532939818965663794>",      # Eternal
+        "<:rarity23_Chaos:1532939816499548331>",        # cHa0s
+        "<:rarity20_Apotheotic:1532939820916015208>",   # Quantum Shard
+    ]
 
     # Add Social Credit section
+    rarity_emoji = rarityEmojis[rarity]
+    ohno = "<:ohno:1532954047357653062>" if creditGain < 0 else ""
     sign = "+" if creditGain > 0 else ""
-    embed.add_field(
-        name=f"{sign}{creditGain} Social Credit",
-        value=f"{rarityCredits[rarity]} x {multiplier}",
+    embed.add_field
+        name=f"{sign}{creditGain:,} SOCIAL CREDIT {ohno}",
+        value=f"{rarityCredits[rarity]:,} {rarity_emoji} x{multiplier} ({mobType[mobNum]})",
         inline=False
-    )
 
-    await ctx.send(embed=embed)
+
+    await ctx.sendembed=embed
 
     # Decrease the cycle count and reset if necessary
     cycle -= 1
     if cycle <= 0:
         luckMultiplier = 1
         lastSacrificer = None  # Clear the sacrificer
-        await ctx.send("Luck Frenzy ended!")
-        
- 
-@bot.command(name="tax")
-async def tax(ctx, credit: int):
-    # Calculate tax, subtracted credit, and transferred credit (rounded to nearest integer)
-    tax = round(credit * 0.1)
+        await ctx.send"Luck Frenzy ended!"
+
+
+@bot.commandname="tax"
+async def taxctx, credit: int:
+    # Calculate tax, subtracted credit, and transferred credit rounded to nearest integer
+    tax = roundcredit * 0.1
     subtracted_credit = credit + tax
     transferred_credit = credit
 
     # Create the response message
-    response = (
+    response =
         f"Tax = {tax}\n"
         f"Credit subtracted = {subtracted_credit}\n"
         f"Credit transferred = {transferred_credit}"
-    )
+
 
     # Send the response to the Discord channel
-    await ctx.send(response)
-    
-@bot.command(name='debug')
-async def debug(ctx):
+    await ctx.sendresponse
+
+@bot.commandname='debug'
+async def debugctx:
     rarity_data = [
         {"name": "Common", "chance": "45.0%", "color": 0x85e066},
         {"name": "Unusual", "chance": "20.0%", "color": 0xf3d859},
@@ -250,137 +278,137 @@ async def debug(ctx):
     ]
 
     for rarity in rarity_data:
-        embed = discord.Embed(
+        embed = discord.Embed
             title=f"Rarity: {rarity['name']}",
             description=f"Chance: {rarity['chance']}",
             color=rarity["color"]
-        )
-        await ctx.send(embed=embed)
-		
+
+        await ctx.sendembed=embed
+
 random_words = ["scammer",
-                 "pls bioevent", 
-                 "beggar", 
-                 "pls carry me", 
-                 "ayoub fan", 
-                 "ayoub bigest fan", 
-                 "fire exe, pls ban me", 
-                 "fire exe hater", 
-                 "CASE OH 2.0", 
-                 "im gay", 
-                 "local femboy", 
-                 "im a furry :3", 
+                 "pls bioevent",
+                 "beggar",
+                 "pls carry me",
+                 "ayoub fan",
+                 "ayoub bigest fan",
+                 "fire exe, pls ban me",
+                 "fire exe hater",
+                 "CASE OH 2.0",
+                 "im gay",
+                 "local femboy",
+                 "im a furry :3",
                  "pls banish me"]
 
-@bot.command(name="owoify")
-@commands.has_permissions(administrator=True)
-async def owoify(ctx, user: discord.Member):
+@bot.commandname="owoify"
+@commands.has_permissionsadministrator=True
+async def owoifyctx, user: discord.Member:
     if ctx.author.id not in AUTHORIZED_USERS:
-        await ctx.send("You are not authorized to use this command.")
+        await ctx.send"You are not authorized to use this command."
         return
     original_text = user.display_name
 
-    if random.choice([True, False]):
-        owoified_text = original_text.replace('r', 'w').replace('R', 'W')
+    if random.choice[True, False]:
+        owoified_text = original_text.replace'r', 'w'.replace'R', 'W'
     else:
-        additions = ["owo", ":3", "nyaa~~", "(femboy)", "(furry)", "please fuck me"]
-        owoified_text = original_text + " " + random.choice(additions)
+        additions = ["owo", ":3", "nyaa~~", "femboy", "furry", "please fuck me"]
+        owoified_text = original_text + " " + random.choiceadditions
 
     try:
-        await user.edit(nick=owoified_text)
-        embed = discord.Embed(
+        await user.editnick=owoified_text
+        embed = discord.Embed
             title="OwOify",
             description=f"{user.mention}, your nickname has been changed to: **{owoified_text}**",
-            color=discord.Color.purple()
-        )
-        await ctx.send(embed=embed)
+            color=discord.Color.purple
+
+        await ctx.sendembed=embed
     except discord.Forbidden:
-        await ctx.send("I do not have permission to change this user's nickname.")
+        await ctx.send"I do not have permission to change this user's nickname."
     except discord.HTTPException as e:
-        await ctx.send(f"An error occurred while trying to change the nickname: {e}")
+        await ctx.sendf"An error occurred while trying to change the nickname: {e}"
 
 
-@bot.command(name="change_name")
-@commands.has_permissions(administrator=True)
-async def change_name(ctx, member: discord.Member):
+@bot.commandname="change_name"
+@commands.has_permissionsadministrator=True
+async def change_namectx, member: discord.Member:
     if ctx.author.id not in AUTHORIZED_USERS:
-        await ctx.send("You are not authorized to use this command.")
+        await ctx.send"You are not authorized to use this command."
         return
-    new_nickname = random.choice(random_words)
+    new_nickname = random.choicerandom_words
 
     try:
-        await member.edit(nick=new_nickname)
-        embed = discord.Embed(
+        await member.editnick=new_nickname
+        embed = discord.Embed
             title="Nickname Changed",
             description=f"{member.mention}'s nickname has been changed to **{new_nickname}**",
-            color=discord.Color.gold()
-        )
-        await ctx.send(embed=embed)
+            color=discord.Color.gold
+
+        await ctx.sendembed=embed
     except discord.Forbidden:
-        await ctx.send("I don't have permission to change that user's nickname.")
+        await ctx.send"I don't have permission to change that user's nickname."
     except discord.HTTPException as e:
-        await ctx.send(f"An error occurred: {e}")
+        await ctx.sendf"An error occurred: {e}"
 
 ROLE_ID = 1226909672750059541
 
-@bot.command(name='promote')
-async def promote_command(ctx, member: discord.Member):
+@bot.commandname='promote'
+async def promote_commandctx, member: discord.Member:
     if ctx.author.id in AUTHORIZED_USERS:
-        role = discord.utils.get(ctx.guild.roles, id=ROLE_ID)
+        role = discord.utils.getctx.guild.roles, id=ROLE_ID
         if role:
-            await member.add_roles(role)
-            await ctx.send(
-                f'{member.mention} has been given the role {role.name}.')
+            await member.add_rolesrole
+            await ctx.send
+                f'{member.mention} has been given the role {role.name}.'
         else:
-            await ctx.send('Role not found.')
+            await ctx.send'Role not found.'
     else:
-        await ctx.send('You are not choosen to use this command.')
+        await ctx.send'You are not choosen to use this command.'
 
 
-@bot.command(name='demote')
-async def demote_command(ctx, member: discord.Member):
+@bot.commandname='demote'
+async def demote_commandctx, member: discord.Member:
     if ctx.author.id in AUTHORIZED_USERS:
-        role = discord.utils.get(ctx.guild.roles, id=ROLE_ID)
+        role = discord.utils.getctx.guild.roles, id=ROLE_ID
         if role:
 
-            await member.remove_roles(role)
-            await ctx.send(
-                f'{member.mention} has had the role {role.name} removed.')
+            await member.remove_rolesrole
+            await ctx.send
+                f'{member.mention} has had the role {role.name} removed.'
         else:
-            await ctx.send('Role not found.')
+            await ctx.send'Role not found.'
     else:
-        await ctx.send('You are not choosen to use this command.')
+        await ctx.send'You are not choosen to use this command.'
 
 
 
 ROLE_ID = 1232786203749646357
 
-@bot.command(name='be_monke')
-async def promote_command(ctx, member: discord.Member):
+@bot.commandname='be_monke'
+async def promote_commandctx, member: discord.Member:
     if ctx.author.id in AUTHORIZED_USERS:
-        role = discord.utils.get(ctx.guild.roles, id=ROLE_ID)
+        role = discord.utils.getctx.guild.roles, id=ROLE_ID
         if role:
-            await member.add_roles(role)
-            await ctx.send(
-                f'{member.mention} has been given the role {role.name}.')
+            await member.add_rolesrole
+            await ctx.send
+                f'{member.mention} has been given the role {role.name}.'
         else:
-            await ctx.send('Role not found.')
+            await ctx.send'Role not found.'
     else:
-        await ctx.send('You are not choosen to use this command.')
+        await ctx.send'You are not choosen to use this command.'
 
 
-@bot.command(name='no_monke')
-async def demote_command(ctx, member: discord.Member):
+@bot.commandname='no_monke'
+async def demote_commandctx, member: discord.Member:
     if ctx.author.id in AUTHORIZED_USERS:
-        role = discord.utils.get(ctx.guild.roles, id=ROLE_ID)
+        role = discord.utils.getctx.guild.roles, id=ROLE_ID
         if role:
 
-            await member.remove_roles(role)
-            await ctx.send(
-                f'{member.mention} has had the role {role.name} removed.')
+            await member.remove_rolesrole
+            await ctx.send
+                f'{member.mention} has had the role {role.name} removed.'
         else:
-            await ctx.send('Role not found.')
+            await ctx.send'Role not found.'
     else:
-        await ctx.send('You are not choosen to use this command.')
+        await ctx.send'You are not choosen to use this command.'
 
 
-bot.run(DISCORD_TOKEN)
+bot.runDISCORD_TOKEN
